@@ -576,12 +576,13 @@ class ReportPortalService(object):
         )]
         files.extend(attachments)
         exceptions = []
+        self._batch_logs = []
         for _ in range(POST_LOGBATCH_RETRY_COUNT):
             try:
                 r = self.session.post(url, files=files, verify=self.verify_ssl,
                                       timeout=self.http_timeout)
                 logger.debug("log_batch response: %s", r.text)
-                self._batch_logs = []
+                #self._batch_logs = []
                 return _get_data(r)
             except (ValueError, KeyError, IOError) as exc:
                 exceptions.append(exc)

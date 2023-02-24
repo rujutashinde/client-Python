@@ -579,6 +579,7 @@ class ReportPortalService(object):
         self._batch_logs = []
         for _ in range(POST_LOGBATCH_RETRY_COUNT):
             try:
+                print(f"before post the value of self._batch_logs is {self._batch_logs}")
                 r = self.session.post(url, files=files, verify=self.verify_ssl,
                                       timeout=self.http_timeout)
                 logger.debug("log_batch response: %s", r.text)
